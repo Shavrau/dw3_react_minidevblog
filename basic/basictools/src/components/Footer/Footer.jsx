@@ -4,19 +4,21 @@ const Footer = () => {
   return (
     <>
     <table>
-        <th>
-            Marca
-        </th>
-        <th>
-            Endereço
-        </th>
-        <th>
-            Contato
-        </th>
         <tr>
-            <th>React</th>
-            <th>Rua da Educação, 120</th>
-            <th>f240@fatec.sp.gov.br</th>
+            <th>
+                Marca
+            </th>
+            <th>
+                Endereço
+            </th>
+            <th>
+                Contato
+            </th>
+        </tr>
+        <tr>
+            <td>React F3M</td>
+            <td>Rua Da Educação, 120</td>
+            <td>f240@fatec.sp.gov.br</td>
         </tr>
     </table>
     </>
