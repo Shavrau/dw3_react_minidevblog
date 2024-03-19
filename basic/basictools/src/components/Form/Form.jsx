@@ -1,4 +1,5 @@
 import React from 'react'
+var teste = 8 
 
 const Form = () => {
   const handleMyEvent = (e) => {
@@ -13,7 +14,9 @@ const Form = () => {
       return <h1>Renderizou Lindinho!</h1>
     }
   }
-  return (   
+  return (
+    // <> </> -> Fragmento de código
+    <>
     <div>
         <div>
             <button onClick={handleMyEvent}>Clique Aqui</button>
@@ -33,6 +36,12 @@ const Form = () => {
           {renderButton(false)}
         </div>
     </div>
+    <div>
+        <strong>Valor </strong>{teste}
+        <button onClick={() => {teste =12; console.log(teste)}}>Aperte e Mude</button>
+        <strong>Valor </strong>{teste}
+    </div>
+    </>
   )
 }
 
