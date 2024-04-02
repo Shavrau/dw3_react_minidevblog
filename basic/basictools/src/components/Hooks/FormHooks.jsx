@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const FormHooks = () => {
     const [list] = useState(['Letícia', 'Enzo', 'Kayro', 'Gustavo'])
     const [number, setNumber] = useState(15)
-    const [user] = useState(
+    const [user, setUser] = useState(
         [
             {id:1, nome:'José Carlos', idade:44},
             {id:2, nome:'Maria Rosa', idade:25},
@@ -15,6 +15,19 @@ const FormHooks = () => {
             {id:8, nome:'Pedro Lucas', idade:37},
         ]
     )
+    // const deleteRandomUser = () => {       
+    //     const randomNumber = Math.floor(Math.random() * user.length);
+    //     setUser((prevUser) => {
+    //         return prevUser.filter((user) => user.id !== randomNumber);
+    //     });
+    // };
+
+      const deleteRandomUser = () => {       
+          const randomNumber = Math.floor(Math.random() * user.length);
+          const filteredUsers = user.filter(u => u.id !== user[randomNumber].id)
+          setUser(filteredUsers);
+      };
+
     return (
         <>
             <div>
@@ -51,10 +64,12 @@ const FormHooks = () => {
                                     <td>{item.id}</td>
                                     <td>{item.nome}</td>
                                     <td>{item.idade}</td>
+                                    
                                 </tr>
                             ))
                         }
                 </table>
+                <button onClick={deleteRandomUser}>Excluir Randomicamente</button>
             </div>
         </>
     )
