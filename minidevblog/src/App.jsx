@@ -1,34 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React ,{ useState, useEffect } from 'react'
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from './firebase/config'
+import { BrowserRouter as Router, Route, Navigate,Routes} from 'react-router-dom'
+import { onAuthStateChanged } from 'firebase/auth'
+import { userAuthentication } from './hooks/userAuthentication'
+import { AuthProvider } from './context/AuthContext'
+
 import './App.css'
+import Home from './pages/Home/Home'
+import Navbar from './components/Navbar/Navbar'
+import Footer from './components/Footer/Footer'
+import About from './pages/About/About'
+import Register from './pages/Register/Register'
+import Dashboard from './pages/Dashboard/Dashboard'
+import CreatePost from './pages/CreatePost/CreatePost'
+import Login from './pages/Login/Login'
+import loading from './assets/loading.gif'
 
-function App() {
-  const [count, setCount] = useState(0)
+const app = initializeApp(firebaseConfig);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+const App = () => {
+
+  const [user, setUser] = useState(null)
+  const { auth } = userAuthentication()
+
+  const loadingUser = user === undefined
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      setUser(user)
+    })
+
+  return () => {
+    unsubscribe()
+  }
+}, [auth])
+
+if (loadingUser) {
+  return (<div className="loading">
+    <img src={loading} alt="Loading" />
+  </div>)
+}
+  
+    return (
+      <div className="Blog"> 
+      <AuthProvider value={{ user }}>
+        <Router>
+          <Navbar />
+            <div className="container">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/create-post" element={<CreatePost />} />
+              </Routes>
+            </div>  
+          <Footer />
+        </Router>
+      </AuthProvider>
+    </div>
   )
 }
 
