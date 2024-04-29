@@ -16,7 +16,15 @@ const navbar = () => {
         </NavLink>
         <ul className={styles.links_list}>
           {!user && (
-            <>  
+            <>
+              <li>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) => isActive ? styles.active : null}
+                >
+                  Home
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to="/login"
@@ -31,6 +39,14 @@ const navbar = () => {
                   className={(isActive) => (isActive ? styles.active : null)}
                 >
                   Register
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                to="/about"
+                className={(isActive) => (isActive ? styles.active : null)}
+                >
+                  About
                 </NavLink>
               </li>
             </>
@@ -59,7 +75,9 @@ const navbar = () => {
           )}
           {user && (
             <li>
-              <button onClick={logout} className={styles.logout}>Logout</button>
+              <button onClick={logout} className={styles.logout}>
+                Logout
+              </button>
             </li>
           )}
         </ul>

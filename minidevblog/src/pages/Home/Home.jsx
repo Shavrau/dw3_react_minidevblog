@@ -5,9 +5,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1 className={styles.text}>
-        Bem vindo ao Blog 
-      </h1>
+      Home
     </div>
   )
 }

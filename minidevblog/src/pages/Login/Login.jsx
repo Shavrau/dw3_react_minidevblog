@@ -68,11 +68,11 @@ const Login = () => {
             ></input>
         </label>
         { !loading ? (
-          <button type="submit" className={styles.button}>
+          <button type="submit" className="btn">
             Entrar
           </button>
         ) : (
-          <button type="submit" disabled>
+          <button type="submit" disabled className="btn">
             Carregando...
           </button>
         )} 

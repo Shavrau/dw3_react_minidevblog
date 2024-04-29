@@ -81,7 +81,7 @@ const Register = () => {
         className={styles.input}
         ></input>
       </label>
-      <button className={styles.button}>Cadastrar</button>
+      <button className="btn">Cadastrar</button>
       {error && <p>{error}</p>}
     </form>
 
